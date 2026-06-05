@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB Massothérapie | Florence Berger - Lausanne</title>
+    <title>FB Thérapies manuelles | Florence Berger - Lausanne</title>
     <!-- Polices élégantes et épurées -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
@@ -45,6 +45,17 @@
             text-decoration: none;
             color: inherit;
             transition: color 0.3s ease;
+        }
+
+        /* --- FILTRE NOIR ET BLANC POUR TOUTES LES IMAGES --- */
+        img {
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+        
+        /* Effet au survol (optionnel, on garde noir et blanc strict) */
+        img:hover {
+            filter: grayscale(100%); 
         }
 
         /* --- NAVIGATION --- */
@@ -177,7 +188,7 @@
         .hero-image {
             flex: 1;
             height: 70vh;
-            border-radius: 20px 20px 20px 20px;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(62, 50, 40, 0.1);
         }
@@ -213,12 +224,15 @@
         .approche {
             background-color: var(--blanc);
             display: flex;
-            align-items: center;
+            align-items: stretch; /* Les blocs s'étirent à la même hauteur */
             gap: 60px;
         }
 
         .approche-text {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .approche-text h3 {
@@ -231,40 +245,50 @@
             margin-bottom: 20px;
             color: var(--gris-texte);
             font-size: 1.1rem;
+            text-align: justify;
         }
 
         .approche-img {
             flex: 1;
             border-radius: 20px;
             overflow: hidden;
+            display: flex;
         }
         
         .approche-img img {
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Bloc alterné pour "Mon approche" */
+        .approche-reverse {
+            background-color: var(--creme);
+            flex-direction: row-reverse;
         }
 
         /* --- SOINS (SERVICES) --- */
         .soins {
-            background-color: var(--creme);
+            background-color: var(--blanc);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 1200px;
+            grid-template-columns: repeat(2, 1fr); /* 2 colonnes car 2 soins */
+            gap: 50px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .service-card {
-            background: var(--blanc);
+            background: var(--creme);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             transition: transform 0.3s ease;
             border: 1px solid var(--bordure);
+            display: flex;
+            flex-direction: column;
         }
 
         .service-card:hover {
@@ -272,7 +296,7 @@
         }
 
         .service-img {
-            height: 250px;
+            height: 300px; /* Plus grand car moins de soins */
             overflow: hidden;
         }
 
@@ -290,23 +314,24 @@
         .service-content {
             padding: 30px;
             text-align: center;
+            flex: 1;
         }
 
         .service-content h3 {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
             color: var(--brun-fonce);
         }
 
         .service-content p {
             color: var(--gris-texte);
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin-bottom: 20px;
         }
 
         /* --- CONTACT & INFOS PRATIQUES --- */
         .contact {
-            background-color: var(--blanc);
+            background-color: var(--creme);
         }
 
         .contact-container {
@@ -314,10 +339,11 @@
             gap: 50px;
             max-width: 1000px;
             margin: 0 auto;
-            background: var(--creme);
+            background: var(--blanc);
             padding: 50px;
             border-radius: 20px;
             border: 1px solid var(--bordure);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
 
         .contact-info {
@@ -344,6 +370,36 @@
             fill: none;
             stroke-width: 1.5;
             flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Langues */
+        .lang-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--bordure);
+        }
+
+        .lang-container span {
+            color: var(--gris-texte);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 10px;
+        }
+
+        .flag {
+            width: 24px;
+            height: 16px;
+            border-radius: 2px;
+            border: 1px solid #ddd;
+            object-fit: cover;
+            /* Annulation du filtre noir et blanc pour les drapeaux */
+            filter: none; 
         }
 
         .contact-widget {
@@ -385,9 +441,34 @@
             background: var(--brun-clair);
         }
 
+        /* --- LECTEUR AUDIO FLOTTANT --- */
+        .audio-floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--brun-clair);
+            color: var(--blanc);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(193, 154, 107, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .audio-floating-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--brun-doux);
+        }
+
         /* --- RESPONSIVE DESIGN (Mobiles & Tablettes) --- */
         @media (max-width: 900px) {
-            .hero, .approche, .contact-container {
+            .hero, .approche, .approche-reverse, .contact-container {
                 flex-direction: column;
             }
             .hero-image {
@@ -397,9 +478,12 @@
             .hero-title {
                 font-size: 2.5rem;
             }
+            .approche-img {
+                height: 300px;
+            }
             .services-grid {
                 grid-template-columns: 1fr;
-                max-width: 450px;
+                max-width: 500px;
             }
             .contact-widget {
                 border-left: none;
@@ -432,7 +516,7 @@
     <!-- NAVIGATION -->
     <nav>
         <a href="#" class="logo">
-            FB Massothérapie
+            FB Thérapies manuelles
             <span>Florence Berger</span>
         </a>
         <div class="menu-toggle" onclick="toggleMenu()">
@@ -441,37 +525,54 @@
             <span></span>
         </div>
         <div class="nav-links">
-            <a href="#approche">Qui suis-je ?</a>
+            <a href="#qui-suis-je">Qui suis-je ?</a>
+            <a href="#approche">Mon approche</a>
             <a href="#soins">Mes Soins</a>
             <a href="#contact">Contact</a>
-            <a href="#contact" class="btn-rdv-nav">Prendre RDV</a>
+            <!-- Modification : Ce lien pointe directement vers OneDoc dans un nouvel onglet -->
+            <a href="https://onedoc.ch/fr/widget/78e13b060c7607b938bde50dc5d248e870b2b12d4f6801e68b5af43546695183" target="_blank" class="btn-rdv-nav">Prendre RDV</a>
         </div>
     </nav>
 
     <!-- SECTION HERO -->
     <section class="hero" id="accueil">
         <div class="hero-content">
-            <h1 class="hero-title">Spécialisée en massage thérapeutique.</h1>
-            <p class="hero-subtitle">Je vous reçois dans mon cabinet à Lausanne, près de Beaulieu, pour soulager vos tensions et restaurer votre équilibre corporel.</p>
-            <a href="#contact" class="btn-primary">Prendre rendez-vous</a>
+            <h1 class="hero-title">Spécialisée en massage classique.</h1>
+            <p class="hero-subtitle">Je vous reçois dans mon cabinet à Lausanne proche de Beaulieu, pour soulager vos tensions et restaurer votre équilibre corporel.</p>
+            <!-- Bouton vers OneDoc -->
+            <a href="https://onedoc.ch/fr/widget/78e13b060c7607b938bde50dc5d248e870b2b12d4f6801e68b5af43546695183" target="_blank" class="btn-primary">Prendre rendez-vous</a>
         </div>
         <div class="hero-image">
-            <!-- Utilisation de la photo globale de Florence avec le patient (jambe) -->
-            <img src="75603.jpg" alt="Florence Berger Massothérapie" onerror="this.src='https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80'">
+            <!-- Photo 1 -->
+            <img src="75603.jpg" alt="FB Thérapies manuelles - Accueil" onerror="this.src='https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80'">
         </div>
     </section>
 
-    <!-- SECTION QUI SUIS-JE & APPROCHE -->
-    <section class="approche" id="approche">
+    <!-- SECTION QUI SUIS-JE -->
+    <section class="approche" id="qui-suis-je">
         <div class="approche-img">
-            <!-- Utilisation de la photo de Florence concentrée sur un massage dos -->
-            <img src="75586.jpg" alt="Mon approche thérapeutique" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80'">
+            <!-- Photo 2 -->
+            <img src="75586.jpg" alt="Florence Berger" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80'">
         </div>
         <div class="approche-text">
-            <h2>Qui suis-je ?</h2>
+            <h2>Florence Berger</h2>
+            <h3>Qui suis-je ?</h3>
+            <p>Depuis de nombreuses années, je m'intéresse à différents domaines dans la santé et le bien-être pour mon équilibre personnel. Ces expériences et apprentissages de vie, couplés à une activité sportive soutenue, m'ont permis de développer des compétences et connaissances ainsi qu'un intérêt grandissant pour le fonctionnement du corps humain, véhicule de notre vie.</p>
+            <p>Mon parcours m'a amené à travailler ma relation avec mon corps, comprenant que les symptômes révèlent un déséquilibre qui appelle à être entendu. Aujourd'hui, la pratique du massage est une activité avec laquelle je me sens pleinement alignée, passionnée par un apprentissage continu qui ne cesse d'évoluer et animée par la richesse des échanges entretenus avec mes patients.</p>
+        </div>
+    </section>
+
+    <!-- SECTION MON APPROCHE (Inversée pour casser la monotonie) -->
+    <section class="approche approche-reverse" id="approche">
+        <div class="approche-img">
+            <!-- Photo 3 -->
+            <img src="75584.jpg" alt="Mon approche thérapeutique" onerror="this.src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80'">
+        </div>
+        <div class="approche-text">
+            <h2>Ma vision</h2>
             <h3>Mon approche thérapeutique</h3>
-            <p>Le corps humain est une mécanique de précision qui accumule les contraintes du quotidien. Mon objectif en tant que massothérapeute n'est pas seulement de détendre, mais de comprendre la source de vos douleurs.</p>
-            <p>J'utilise une approche manuelle personnalisée, alliant écoute des tissus et techniques profondes, pour relâcher les fascias, dénouer les contractures musculaires et redonner à vos articulations leur mobilité naturelle. Chaque séance est un travail d'équipe entre vous et moi pour retrouver un bien-être durable.</p>
+            <p>Que ce soit dans le cadre d'un massage relaxant, classique ou sportif, j'aime prendre le temps de discuter avec mes patients et de comprendre leurs besoins. Mon objectif en tant que thérapeute n'est pas seulement de détendre mais de comprendre la source de vos douleurs.</p>
+            <p>J'utilise une approche personnalisée, adaptée aux tensions existantes qui allie des techniques manuelles superficielles ou profondes pour relâcher les raideurs musculaires, assouplir les tissus, redonner de la mobilité aux articulations, de la souplesse aux ligaments et tendons ainsi que favoriser la circulation sanguine.</p>
         </div>
     </section>
 
@@ -480,39 +581,27 @@
         <h2 class="section-title">Mes Soins</h2>
         <div class="services-grid">
             
-            <!-- Carte 1 : Classique / Thérapeutique -->
+            <!-- Carte 1 : Massage classique -->
             <div class="service-card">
                 <div class="service-img">
-                    <!-- Photo dos détaillée -->
-                    <img src="75584.jpg" alt="Massage Classique Thérapeutique">
+                    <!-- Photo 4 -->
+                    <img src="75597.jpg" alt="Massage classique" onerror="this.src='https://images.unsplash.com/photo-1588286840104-8957b019727f?auto=format&fit=crop&w=800&q=80'">
                 </div>
                 <div class="service-content">
-                    <h3>Massage Thérapeutique & Classique</h3>
-                    <p>Un travail ciblé pour dénouer les tensions musculaires chroniques, soulager les maux de dos, les cervicalgies et améliorer votre posture globale.</p>
+                    <h3>Massage classique</h3>
+                    <p>Un travail ciblé pour traiter les tensions musculaires telles que des courbatures ou contractures ou d'autres pathologies telles qu'une tendinite, cervicalgie ou lombalgie. Le massage classique est indiqué pour la prévention des blessures, la préparation ou la récupération à une compétition sportive.</p>
                 </div>
             </div>
 
-            <!-- Carte 2 : Sportif -->
+            <!-- Carte 2 : Massage relaxant -->
             <div class="service-card">
                 <div class="service-img">
-                    <!-- Photo épaule / deep tissue -->
-                    <img src="75597.jpg" alt="Massage Sportif">
+                    <!-- Photo 5 -->
+                    <img src="75585.jpg" alt="Massage relaxant" onerror="this.src='https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80'">
                 </div>
                 <div class="service-content">
-                    <h3>Massage Sportif</h3>
-                    <p>Techniques toniques et profondes idéales pour la préparation à l'effort, la prévention des blessures ou la récupération en évacuant l'acide lactique.</p>
-                </div>
-            </div>
-
-            <!-- Carte 3 : Relaxant -->
-            <div class="service-card">
-                <div class="service-img">
-                    <!-- Photo massage doux dos/mains -->
-                    <img src="75585.jpg" alt="Massage Relaxant">
-                </div>
-                <div class="service-content">
-                    <h3>Massage Relaxant</h3>
-                    <p>Des manœuvres fluides et enveloppantes pour apaiser le système nerveux, réduire la charge mentale et offrir un véritable lâcher-prise.</p>
+                    <h3>Massage relaxant</h3>
+                    <p>Des manœuvres fluides et enveloppantes afin d'apaiser le système nerveux, relâcher le mental, assouplir les tissus pour un moment de détente optimal.</p>
                 </div>
             </div>
 
@@ -531,7 +620,7 @@
                     <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     <div>
                         <strong>Adresse du cabinet</strong><br>
-                        Quartier de Beaulieu<br>
+                        Avenue des Bergières 49<br>
                         1004 Lausanne
                     </div>
                 </div>
@@ -540,16 +629,24 @@
                     <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     <div>
                         <strong>Téléphone</strong><br>
-                        +41 7X XXX XX XX
+                        +41 79 828 14 15
                     </div>
                 </div>
 
                 <div class="info-item">
                     <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <div>
-                        <strong>Email</strong><br>
-                        florence@fbmassotherapie.ch
+                        <strong>E-mail</strong><br>
+                        florenceberger1@outlook.com
                     </div>
+                </div>
+
+                <div class="lang-container">
+                    <span>Langues parlées :</span>
+                    <!-- Drapeau FR / CH -->
+                    <img src="https://flagcdn.com/w40/ch.png" alt="Français" class="flag" title="Français">
+                    <!-- Drapeau UK -->
+                    <img src="https://flagcdn.com/w40/gb.png" alt="English" class="flag" title="English">
                 </div>
             </div>
 
@@ -557,7 +654,6 @@
                 <h3 style="color: var(--brun-fonce); font-family: 'Lato', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 20px;">Réservez en ligne</h3>
                 <p style="color: var(--gris-texte); font-size: 0.9rem; margin-bottom: 30px;">Accédez directement à mon agenda OneDoc pour choisir le créneau qui vous convient.</p>
                 
-                <!-- Lien vers le widget OneDoc fourni par la cliente -->
                 <a href="https://onedoc.ch/fr/widget/78e13b060c7607b938bde50dc5d248e870b2b12d4f6801e68b5af43546695183" target="_blank" class="btn-primary" style="padding: 20px 40px; font-size: 1.1rem; width: 100%;">
                     Ouvrir l'agenda OneDoc
                 </a>
@@ -568,12 +664,29 @@
     <!-- FOOTER -->
     <footer>
         <div class="social-links">
-            <a href="#" target="_blank" title="Instagram">
+            <a href="https://www.instagram.com/fb_massotherapeute/" target="_blank" title="Instagram FB Massothérapeute">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
         </div>
-        <p>&copy; 2026 FB Massothérapie - Florence Berger. Tous droits réservés.</p>
+        <p>&copy; 2026 FB Thérapies manuelles - Florence Berger. Tous droits réservés.</p>
     </footer>
+
+    <!-- LECTEUR AUDIO MUSICAL DISCRET -->
+    <audio id="spa-audio" loop preload="auto">
+        <source src="https://kreuille.github.io/leman-et-moi/Whispers_of_the_Verdant_Grove.mp3" type="audio/mpeg">
+        <source src="Whispers_of_the_Verdant_Grove.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="audio-floating-btn" onclick="toggleAudio()" title="Activer l'ambiance sonore">
+        <!-- Icône Note de musique -->
+        <svg id="icon-music" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>
+        </svg>
+        <!-- Icône Pause (cachée par défaut) -->
+        <svg id="icon-pause" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" style="display:none;">
+            <rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+    </button>
 
     <!-- SCRIPTS -->
     <script>
@@ -588,6 +701,32 @@
                 document.querySelector('.nav-links').classList.remove('active');
             });
         });
+
+        // Gestion de l'audio
+        const audio = document.getElementById('spa-audio');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            const iconMusic = document.getElementById('icon-music');
+            const iconPause = document.getElementById('icon-pause');
+            const btn = document.querySelector('.audio-floating-btn');
+            
+            if(audio.paused) {
+                audio.volume = 0.4; 
+                audio.play().then(() => {
+                    iconMusic.style.display = 'none';
+                    iconPause.style.display = 'block';
+                    btn.style.animation = 'pulse 2s infinite';
+                    isPlaying = true;
+                }).catch(e => console.log("Lecture audio bloquée par le navigateur :", e));
+            } else {
+                audio.pause();
+                iconMusic.style.display = 'block';
+                iconPause.style.display = 'none';
+                btn.style.animation = 'none';
+                isPlaying = false;
+            }
+        }
     </script>
 </body>
 </html>
